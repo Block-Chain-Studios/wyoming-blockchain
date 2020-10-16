@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>MyMovies</title>
+        <meta name="monetization" content="bcsott@moneybutton.com">
+        <!-- <meta name="monetization" content=""> -->
+        <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://metaflix.icu/css/style.css"> -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="moneystream.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+        <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+        <script type="text/javascript" src="chrome-extension-async.js"></script>  
+        <script src="utils.js"></script>
+      
+    </head>
+    <body style="width:100%;background:#000000;color:white;text-align: center">
+        <div class="container">
+            <div class="menu">
+                <!-- <button id="btnScript" onclick="showScript()">Show Script</button>
+                <button id="btnVideo" onclick="showVideo()">Show Movie</button> -->
+                <a class="linkAvailable" href="moneystream_ad.html">View Ad</a>
+                <a class="linkAvailable" href="moneystream.html">Show Movie</a>
+                <a class="linkAvailable" href="moneystream_script.html">Show Script</a>
+            </div>
+            <div class="row">
+                <div style="display: block;background-color: #000000;">
+                    <video id="videojs-mux-player" 
+                      class="video-js" controls preload="auto" 
+                      poster="MWH.jpg"
+                      width="200" height="150"
+                      data-setup='{"liveui": true}'>
+                      <source src="mwh.m3u8" type="application/x-mpegURL" />
+                    </video>
+                  </div>          
+            </div>
+            <div class="row">
+                <div style="display: block;background-color: #000000;">
+                    <video id="videojs-mux-player" 
+                      class="video-js" controls preload="auto" 
+                      poster="MWH.jpg"
+                      width="200" height="150"
+                      data-setup='{"liveui": true}'>
+                      <source src="mwh.m3u8" type="application/x-mpegURL" />
+                    </video>
+                  </div>          
+            </div>
+            <div class="row">
+                <div style="display: block;background-color: #000000;">
+                    <video id="videojs-mux-player" 
+                      class="video-js" controls preload="auto" 
+                      poster="MWH.jpg"
+                      width="200" height="150"
+                      data-setup='{"liveui": true}'>
+                      <source src="mwh.m3u8" type="application/x-mpegURL" />
+                    </video>
+                  </div>          
+            </div>
+
+        </div>
+    </body>
+</html>

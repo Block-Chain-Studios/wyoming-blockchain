@@ -1,0 +1,83 @@
+  #unlockable {
+    display: none;
+    opacity: 0;
+    transition: opacity 5s;
+  }
+
+  #unlockablescript {
+    display: none;
+    opacity: 0;
+    transition: opacity 5s;
+  }
+
+  #unlockable.unlocked {
+    display: inline;
+    opacity: 1;
+  }
+
+  #unlockablescript.unlocked {
+    display: flex;
+    opacity: 1;
+  }
+
+  .linkSelected {
+    background-color: black;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .linkAvailable {
+    background-color: rgb(147, 147, 204);
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  .colvids {
+    /* float: left;
+    width: 50%;
+    padding: 10px; */
+    /* height: 300px; */
+    margin: 20px auto;
+    max-width: 400px;
+  }
+
+  .plyr {
+    border-radius: 10px;
+  }
+  
+  .rowvids {
+    padding: 1px;
+  }
+  /* Clear floats after the columns */
+  .rowvids:after {
+    content: "";
+    display: table;
+    clear: both;
+    /* width: 500px; */
+  }
+  .vidcontainer {
+    width:650px;
+    background-color: gray;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  fieldset {margin:0;padding:0;border:solid}
+
+  .moneycounter {font-size: 16pt;}
+
+  #cardpayout {
+    color: white;
+    background-color: gray;
+  }

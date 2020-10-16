@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MyMovies</title>
+  <meta name="monetization" content="bcsott@moneybutton.com">
+  <meta name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://metaflix.icu/css/style.css"> -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="moneystream.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+  <script type="text/javascript" src="chrome-extension-async.js"></script>  
+  <script src="utils.js"></script>
+
+  <script>
+    let monetizationTotal = 0
+    monetizationEvent = (event) => {
+      console.log(event)
+    //   document.getElementById("monStatus").textContent = document.monetization.state
+    //   document.getElementById("monEvent").textContent = event.type
+      if (event.type === 'monetizationprogress') {
+        monetizationTotal += Number(event.detail.amount)
+        if (monetizationTotal > 0) {
+            handleSuccessfulPayment()
+        }
+        //console.log(xtn)
+        // document.getElementById("monAmount").textContent 
+        //   = `${convertSatoshisToUsd(xtn.balanceSatoshis-monetizationTotal, exchange).toFixed(4)}`
+      }
+      if (event.type == 'monetizationstop') {
+        // player.pause()
+        document.getElementById("monetizationMessage").style.display="block"
+      }
+    }
+
+    if (document.monetization){
+      document.monetization
+      .addEventListener('monetizationpending', monetizationEvent)
+      document.monetization
+      .addEventListener('monetizationstart', monetizationEvent)
+      document.monetization
+      .addEventListener('monetizationprogress', monetizationEvent)
+      document.monetization
+      .addEventListener('monetizationstop', monetizationEvent)
+    }
+    /* Paywall javascript The Javascript you'll need in your website */
+    function handleSuccessfulPayment(payment) {
+      document.getElementById("monetizationMessage").style.display="none"
+      unlockContent()
+    }
+
+    function handleFailedPayment(error) {
+      alert("Sorry, the payment did not process correctly.")
+    }
+
+    function unlockContent() {
+        const paywall = document.getElementById("unlockablescript")
+        if (paywall) {
+            paywall.classList.add("unlocked")
+        } else {
+            console.log(`NO CONTENT TO UNLOCK`)
+        }
+    }
+
+  </script>
+
+</head>
+
+<body style="width:100%;background:#000000;color:white;text-align: center">
+<div class="container">
+  <div class="menu mb-3">
+    <a class="linkAvailable" href="moneystream_ad.html">View Ad</a>
+    <a class="linkAvailable" href="moneystream.html">Show Movie</a>
+    <a class="linkSelected">Show Script</a>
+    <img src="bcs_coin.jpg" height="100" width="100">
+  </div>
+  <div id="monetizationMessage">
+    Waiting for monetization to start. Make sure your MoneyStream is turned ON.
+  </div>
+  <div class="row hidden">
+    <div class="col-9">
+      <pre style="color:black;background-color:white">col1</pre>
+    </div>
+    <div class="col-3"><img width="150" src="https://bico.media/860999e3083ef92397b273d98ddafc1f8cb215cf569f4a03185c6e9c85b1a3b4"></div>
+  </div>
+  <div id="unlockablescript" class="row">
+    <div class="col-9">
+    <pre style="color:black;background-color:white">
+        
+      
+      He clicks the mouse and deals the cards. He rubs his hands
+      together.
+
+                  THE POPE
+            Venite hoc facuint, Let's do this.
+
+20 EXT. REDDING AIRPORT - NIGHT
+
+            Friday, November 14, 2008 - 0100 p.s.t.
+
+    <a href="vids.html">A Helicopter lands.</a> Two men in black boots, jeans, leather
+    jackets, and VR Sunglasses exit the Helicopter. Inspector
+    ROVER, 35, goatee, bald head, checks his watch. Two gold
+    plated Desert Eagles hang from his shoulder holsters under
+    his black leather Members Only Jacket. SYD, 55, Samuel L.
+    Jackson Geri curl, leather trench coat, accompanies him,
+    limps.
+
+                SYD
+          I can see losing a whole node for a
+          few seconds, but the whole damn
+          internet?
+
+                ROVER
+          It went dark for twelve seconds.
+          You know how long twelve seconds is
+          in internet time?
+
+                SYD
+          Twelve seconds, dumbass. Why you
+          all mister trick question tonight?
+
+                ROVER
+          You're old ass is cranky tonight,
+          change your diaper today?
+          They walk toward a Black Mini-Van.
+
+                SYD
+          Nah, I just got two more weeks of
+          this shit and I'm going to bust your
+          remaining testicle every minute until
+          then.
+
+  Catches Rover off guard.
+
+                ROVER
+          Didn't know you were that short.
+
+                SYD
+          Surprise, knucklehead.
+
+                ROVER
+          Dang, we need to find this fool fast
+          and bust a zap in this alien ass and
+          go celebrate tonight. Send you off
+          in style.
+
+    </pre>
+    </div>
+    <div class="col-3">
+      <div class="row mb-10">
+        <a target="blank" href="vids.html">
+        <img width="150" src="https://bico.media/860999e3083ef92397b273d98ddafc1f8cb215cf569f4a03185c6e9c85b1a3b4">
+        </a>
+      </div>
+      <div class="row mb-10">
+        <a target="blank" href="moneystream_bico.html?tx=89ebe9ba41d88fe883b8d326961890b545f8e7897157a7fd957fb96b19ae96df">
+          <img width="150" src="https://bico.media/89ebe9ba41d88fe883b8d326961890b545f8e7897157a7fd957fb96b19ae96df">
+        </a>
+      </div>
+      <div class="row mb-10">
+        <a target="blank" href="moneystream_bico.html?tx=94e4c72cadbafa9193167848af9c11e4696e02053bcc4c9cc896e94ff3ab861b">
+          <img width="150" src="https://bico.media/94e4c72cadbafa9193167848af9c11e4696e02053bcc4c9cc896e94ff3ab861b">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hidden">
+    <object data="Wind_River.pdf"
+      type="application/pdf" width="90%"
+      height = "600"
+    ></object>
+  </div>
+</div>
+</body>

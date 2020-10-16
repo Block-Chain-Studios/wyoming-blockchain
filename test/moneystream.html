@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MyMovies</title>
+  <meta name="monetization" content="">
+  <meta name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://metaflix.icu/css/style.css"> -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="moneystream.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+  <script type="text/javascript" src="chrome-extension-async.js"></script>  
+  <script src="utils.js"></script>
+  <script src="https://www.moneybutton.com/moneybutton.js"></script>
+
+  <script>
+    let xtn = null
+    let monetizationTotal = 0
+    monetizationEvent = (event) => {
+      console.log(event)
+      const monStatus = document.getElementById("monStatus")
+      const monEvent = document.getElementById("monEvent")
+      const monAmount = document.getElementById("monAmount")
+      let monColor = "red"
+      monStatus.textContent = document.monetization.state
+      monEvent.textContent = event.type
+      if (event.type === 'monetizationprogress') {
+        monetizationTotal += Number(event.detail.amount)
+        monColor = "yellow"
+        if (monetizationTotal >= 600) monColor = "green"
+          monAmount.textContent 
+          = `${convertSatoshisToUsd(xtn.extension.balanceSatoshis-monetizationTotal, exchange).toFixed(4)}`
+      }
+      if (event.type == 'monetizationstop') {
+        player.pause()
+      }
+      monStatus.style.color = monColor
+      monAmount.style.color = monColor
+    }
+
+    if (document.monetization){
+      document.monetization
+      .addEventListener('monetizationpending', monetizationEvent)
+      document.monetization
+      .addEventListener('monetizationstart', monetizationEvent)
+      document.monetization
+      .addEventListener('monetizationprogress', monetizationEvent)
+      document.monetization
+      .addEventListener('monetizationstop', monetizationEvent)
+    }
+    /* Paywall javascript The Javascript you'll need in your website */
+    function handleSuccessfulPayment(payment) {
+      unlockContent()
+    }
+
+    function unlockContent() {
+      if (document.getElementById("unlockable")) {
+        document.getElementById("unlockable").classList.toggle("unlocked")
+      }
+      else {
+        console.log(`NO CONTENT TO UNLOCK`)
+      }
+    }
+
+  </script>
+
+<script>
+  const payBTCbutton = (data, cb) => {
+    var div = document.querySelector("#signBTC")
+    moneyButton.render(div, {
+      label: 'Watch with BTC',
+      successMessage: 'movie will play',
+      cryptoOperations: [
+        {
+          name: 'sig',
+          method: 'sign',
+          data: data,
+          dataEncoding: 'utf8',
+        },
+        {
+          name: 'pubkey',
+          method: 'public-key',
+          key: 'identity'
+        },
+        {
+          name: 'paymail',
+          method: 'paymail'
+        }
+      ],
+      onCryptoOperations: (p) => {
+        console.log("p = ", p)
+        let sig = p[0].value;
+        let pubkey = p[1].value;
+        let paymail = p[2].value;
+        console.log("p = ", p[0])
+        console.log("sig = ", sig)
+        console.log("data = ", data)
+        cb({
+          sig: sig,
+          pubkey: pubkey,
+          paymail: paymail,
+          data: data
+        })
+      }
+    })
+  }
+  const payETHbutton = (data, cb) => {
+    var div = document.querySelector("#signETH")
+    moneyButton.render(div, {
+      label: 'Watch with ETH',
+      successMessage: 'movie will play',
+      cryptoOperations: [
+        {
+          name: 'sig',
+          method: 'sign',
+          data: data,
+          dataEncoding: 'utf8',
+        },
+        {
+          name: 'pubkey',
+          method: 'public-key',
+          key: 'identity'
+        },
+        {
+          name: 'paymail',
+          method: 'paymail'
+        }
+      ],
+      onCryptoOperations: (p) => {
+        console.log("p = ", p)
+        let sig = p[0].value;
+        let pubkey = p[1].value;
+        let paymail = p[2].value;
+        console.log("p = ", p[0])
+        console.log("sig = ", sig)
+        console.log("data = ", data)
+        cb({
+          sig: sig,
+          pubkey: pubkey,
+          paymail: paymail,
+          data: data
+        })
+      }
+    })
+  }
+  document.addEventListener("DOMContentLoaded", (e) => {
+    payBTCbutton("1602363003756", (o) => {
+      ["data", "pubkey", "paymail", "sig"].forEach((id) => {
+        document.querySelector("#" + id).value = o[id]
+      })
+      // TODO: check signature against saved sig
+      // document.querySelector("form#login").submit()
+      whenPay()
+    })
+    payETHbutton("1602363003756", (o) => {
+      ["data", "pubkey", "paymail", "sig"].forEach((id) => {
+        document.querySelector("#" + id).value = o[id]
+      })
+      // TODO: check signature against saved sig
+      // document.querySelector("form#login").submit()
+      whenPay()
+    })
+  })
+
+  let paidInFull = false
+  function whenPay() {
+      console.log(`movie paid`)
+      paidInFull = true
+      player.play()
+  }
+  </script>
+
+</head>
+
+<body style="width:100%;background:#000000;color:white;text-align: center">
+  <div class="menu">
+    <a class="linkAvailable" href="moneystream_ad.html">View Ad</a>
+    <a class="linkSelected">Show Movie</a>
+    <a class="linkAvailable" href="moneystream_script.html">Show Script</a>
+  </div>
+  <div class="container french">
+    <div class="row justify-content-center mt-3">
+      <div>Pay $19.99 for the full movie or Pay by the Second with MoneyStream</div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div id='signETH'></div>
+      <div id='signBTC'></div>
+      <form method='post' id='login'>
+      <input name='data' type='hidden' id='data' value="1602363003756">
+      <input name='pubkey' type='hidden' id='pubkey'>
+      <input name='paymail' type='hidden' id='paymail'>
+      <input name='sig' type='hidden' id='sig'>
+      </form>
+    </div>
+    <div class="row justify-content-center text-center">
+      <h5>My White Husband (Director Linda Menfo) [1 hour 12 minutes] (French)</h5>
+    </div>
+    <div id="mySidenav" class="sidenav">
+      <span id="monInfo">null</span>
+    </div>
+    <div id="mySidenav" class="sidenav">
+      Wallet Balance: <span id="monAmount">null</span>
+    </div>
+    <div id="mySidenav" class="sidenav hidden">
+      Event: <span id="monEvent">null</span>
+    </div>
+    <div id="mySidenav" class="sidenav">
+      Status: <span id="monStatus">null</span>
+    </div>
+    <div class="examples">
+      <div class="row justify-content-center">
+      <div id="unlocked">
+        <div style="display: block;background-color: #000000;">
+          <video id="videojs-mux-player" 
+            class="video-js" controls preload="auto" 
+            poster="tiatro.jpg"
+            width="800" height="600"
+            data-setup='{"liveui": true}'>
+            <source src="mwh.m3u8" type="application/x-mpegURL" />
+          </video>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  <footer class="page-foot bg-gray-900">
+    <section class="footer-content">
+      <div class="container">
+        <div class="rd-navbar-brand-2"><a class="brand-name" href="index.html"><img src="images/logo-default.png"
+              alt="" style = "width:200px; object-fit: contain"></a></div>
+      </div>
+    </section>
+    <section class="footer-copyright-1 copyright">
+      <div class="container">
+        <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All
+            Rights Reserved.</span><span>&nbsp;</span><br class="d-sm-none" /><a href="terms.html">Terms of
+            Use.</a><span> Design&nbsp;by&nbsp;<a href="https://zemez.io/">MyMovies.Us</a></span></p>
+      </div>
+    </section>
+  </footer>
+  <script src="js/core.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    let exchange = null
+    getExchange().then(x => exchange = x)
+  </script>
+  <script src="https://bico.media/b://9949020cfeae6551830978705b63152efb282adc3a6e79bbb6af13ba36d20900.js"></script>
+
+  <script>
+
+    window.addEventListener("message", (event) => {
+      if (event.source == window &&
+          event.data.direction &&
+          event.data.direction == "extension-to-browser") {
+        console.log(event.data.message)
+      }
+      if (event.data.command == "info") {
+        console.log(event.data.message)
+        xtn = event.data.message
+        document.getElementById("monInfo").textContent = `${xtn.name} ${xtn.version}`
+        document.getElementById("monAmount").textContent 
+          = `${convertSatoshisToUsd(xtn.balanceSatoshis, exchange).toFixed(4)}`
+      }
+    })
+
+    checkExtension()
+    .then(x => {
+      xtn = x
+      console.log(xtn)
+      document.getElementById("monInfo").textContent = `${xtn.extension.name} ${xtn.extension.version}`
+      document.getElementById("monAmount").textContent 
+          = `${convertSatoshisToUsd(xtn.extension.balanceSatoshis, exchange).toFixed(4)}`
+    })
+    let player = videojs('videojs-mux-player')
+    player.on('play', () => {
+      console.log('play')
+      if (paidInFull === false) {
+        startMonetization(window.location.href,'bcsott@moneybutton.com')
+          .then(r => {
+            // progressTimer = setInterval(whenProgress, timerSeconds * 1000)
+            if (r === false) player.pause()
+        })
+      }
+    })
+    player.on('pause', () => {
+      console.log('paused')
+      //if (progressTimer) clearInterval(progressTimer)
+      stopMonetization()
+      .then(r => {
+        console.log(r)
+      })
+    })
+  </script>
+  
+</body>
+<script>
+  function closeMe() {
+    $(".rd-navbar-toggle").trigger('click');
+  }
+
+</script>
+
+</html>

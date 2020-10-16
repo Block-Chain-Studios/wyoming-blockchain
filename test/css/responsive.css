@@ -1,0 +1,185 @@
+@media only screen and (max-width: 823px) {
+    /* makeyourmovie */
+.home-iframe {
+    
+ 
+}
+iframe {
+    min-width: 100%; 
+    width: 100px;
+    *width: 100%; 
+}
+section {
+    position:relative;
+}
+    .page-content .section.section-inset-1 {
+        padding-top: 0;
+    }
+
+    .page-content .bg-light.section-xl {
+        display: none
+    }
+
+    .page-foot .footer-content .rd-navbar-brand-2 img {
+        width: 80%;
+    }
+
+    .page-foot .footer-content .list-inline a {
+        font-size: 35px;
+    }
+
+    /* 404 */
+    .rd-navbar-inner .rd-navbar-panel .rd-navbar-brand {
+        position: relative;
+    }
+
+    .rd-navbar-fixed .rd-navbar-panel {
+        height: 80px;
+
+    }
+
+    button.rd-navbar-toggle.toggle-original {
+        margin-top: 10px;
+    }
+
+    /* ted */
+    #thumbnail-slider-prev,
+    #thumbnail-slider-next {
+        display: inline !important;
+    }
+
+    .details {
+        width: 75%;
+        padding-left: 0 !important;
+    }
+
+    main.page-content {
+        padding-top: 22px;
+    }
+
+    /* test */
+
+    .img__ {
+        width: 100%;
+        height: unset;
+    }
+
+    /* index */
+
+    .c__ {
+        width: unset !important
+    }
+
+    .container.c,
+    #my-slider {
+        width: unset !important
+    }
+
+    iframe.top {
+        height: 60vw;
+    }
+
+    .img_ {
+        width: 220px !important;
+        margin-left: 15% !important;
+        z-index: 1;
+    }
+
+    .rd-navbar-nav {
+        padding-left: 0 !important;
+    }
+
+    .ism-caption {
+        top: unset !important;
+        bottom: 0 !important
+    }
+
+
+    .rd-navbar-fixed .rd-navbar-brand {
+        left: 0px;
+        margin: 0 auto;
+    }
+
+    /* main */
+
+    .over_ {
+        width: 90vw;
+        padding-left: 13vw;
+    }
+
+    .over__ {
+        width: 110vw;
+        padding-left: 20%;
+    }
+
+    .video-box-overlay img {
+        width: 70%;
+    }
+
+    .owl-item blockquote {
+        text-align: center
+    }
+
+    .page-foot.bg-gray-900 {
+        text-align: center
+    }
+
+    body {
+        overflow-x: hidden
+    }
+
+    /* french streaming */
+
+
+    .container.french {
+        margin-top: 100px;
+        width: 70%;
+    }
+
+    .container.french h1 {
+        font-size: 2em;
+    }
+
+    .container.french h2 {
+        font-size: 1.5em;
+    }
+
+    .rd-navbar-search,
+    .fa-shopping-cart {
+        display: none !important;
+    }
+
+    .row-45 {
+        margin-bottom: 0 !important;
+    }
+
+    .page-content.four {
+        padding: 0 !important;
+    }
+    .logo-block {
+        margin:0 auto;
+    }
+}
+
+.money-button iframe {
+    width: 170px !important;
+}
+
+.container.french img {
+    margin-top: 20px;
+}
+
+#mySidenav a {
+    color: white;
+}
+
+/* counter */
+
+#counter {
+    color: white;
+    padding: 10px 0;
+}
+
+.page {
+    padding-top: 56px;
+}

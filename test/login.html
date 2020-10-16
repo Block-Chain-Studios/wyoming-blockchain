@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <script src="https://www.moneybutton.com/moneybutton.js"></script>
+        <script>
+        const signbutton = (data, cb) => {
+          var div = document.querySelector("#sign")
+          moneyButton.render(div, {
+            label: 'Swipe to Login',
+            successMessage: 'authenticated',
+            cryptoOperations: [
+              {
+                name: 'sig',
+                method: 'sign',
+                data: data,
+                dataEncoding: 'utf8',
+              },
+              {
+                name: 'pubkey',
+                method: 'public-key',
+                key: 'identity'
+              },
+              {
+                name: 'paymail',
+                method: 'paymail'
+              }
+            ],
+            onCryptoOperations: (p) => {
+              console.log("p = ", p)
+              let sig = p[0].value;
+              let pubkey = p[1].value;
+              let paymail = p[2].value;
+              console.log("p = ", p[0])
+              console.log("sig = ", sig)
+              console.log("data = ", data)
+              cb({
+                sig: sig,
+                pubkey: pubkey,
+                paymail: paymail,
+                data: data
+              })
+            }
+          })
+        }
+        document.addEventListener("DOMContentLoaded", (e) => {
+          signbutton("1602363003756", (o) => {
+            ["data", "pubkey", "paymail", "sig"].forEach((id) => {
+              document.querySelector("#" + id).value = o[id]
+            })
+            // TODO: check signature against saved sig
+            // document.querySelector("form#login").submit()
+            whenLoggedIn()
+          })
+        })
+
+        function whenLoggedIn() {
+            console.log(`LOGGED IN`)
+            window.location='moneystream.html'
+        }
+        </script>
+        
+    </head>
+    <body>
+        <div class='container'>
+          <h1>MyMovies</h1>
+          <div id='sign'></div>
+          <form method='post' id='login' action="login.html">
+          <input name='data' type='hidden' id='data' value="1602363003756">
+          <input name='pubkey' type='hidden' id='pubkey'>
+          <input name='paymail' type='hidden' id='paymail'>
+          <input name='sig' type='hidden' id='sig'>
+          </form>
+          <div class='footer'>
+            <div>no moneybutton? <a href="https://www.moneybutton.com/">get a free account</a></div>
+            <div>having issues with iPhone? <a target="_blank" href="/mobilemb.gif">learn how</a></div>
+          </div>
+        </div>
+        </body>
+</html>
